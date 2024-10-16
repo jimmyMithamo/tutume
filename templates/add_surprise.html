@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Add Surprise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        form p {
+            margin: 10px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Add Surprise</h1>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.recipient_name.label }}<br>
+            {{ form.recipient_name(size=32) }}
+        </p>
+        <p>
+            {{ form.delivery_date.label }}<br>
+            {{ form.delivery_date() }}
+        </p>
+        <p>
+            {{ form.message.label }}<br>
+            {{ form.message(rows=4, cols=40) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <a href="{{ url_for('home.index') }}">Back to Home</a>
+</body>
+</html>

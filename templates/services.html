@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutume - Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(90deg, #000000, #1f0a58);
+            background-color: #006989;
+        }
+
+        header {
+            background: linear-gradient(90deg, #c7c5b7, #bd460f); /* Gradient from dark to light green */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: fit-content;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .service {
+            background-color: #F3F7EC;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 5px;
+            padding: 5px;
+            height: auto;
+            width: calc(25% - 40px); /* Adjust the width for a responsive layout */
+            box-sizing: border-box;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .service img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .service h3 {
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .service p {
+            color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1vh;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tutume</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/home/services">Services</a>
+            <a href="/home/about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="services-container">
+        <div class="service">
+            <a href="/services/shopping"><img src="/static/images/shopping.jpg" alt="Shopping Service"></a>
+            <h3>Shopping Services</h3>
+            <p>Let us handle your shopping needs. We buy and deliver items right to your doorstep.</p>
+        </div>
+        <div class="service">
+            <a href="/services/parcel"><img src="/static/images/parcel.jpg" alt="Parcel Service"></a>
+            <h3>Parcel Services</h3>
+            <p>Our parcel service ensures your packages are delivered safely and on time.</p>
+        </div>
+        <div class="service">
+            <a href="/services/fooddelivery"><img src="/static/images/delivery.jpg" alt="Long Distance Service"></a>
+            <h3>Food delivery Services</h3>
+            <p>We partner with local restaurants to deliver meals to customers.</p>
+        </div>
+        <div class="service">
+            <a href="/services/handyman"><img src="/static/images/handyman.jpg" alt="Short Distance Service"></a>
+            <h3>Handyman Service</h3>
+            <p> Connect customers with skilled handymen for tasks like repairs, installations, or assembly</p>
+        </div>
+        <div class="service">
+            <a href="/services/furniture"><img src="/static/images/furniture.jpg" alt="Furniture Service"></a>
+            <h3>Furniture delivery</h3>
+            <p>We deliver furniture and appliances.</p>
+        </div>
+        <div class="service">
+            <a href="/services/surprise_express"><img src="/static/images/surprise.jpeg" alt="Furniture Service"></a>
+            <h3>Surprise Express</h3>
+            <p>Delivering joy with unexpected gifts,flowers and thoughtful surprises, making every moment special.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Tutume. All rights reserved.</p>
+    </footer>
+</body>
+</html>

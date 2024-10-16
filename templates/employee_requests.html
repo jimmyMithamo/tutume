@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee - Requests</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Make sure this path is correct -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1B1B2A;
+            color: #EAEAEA;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(90deg, #3E5B8A, #6A4C93);
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFD60A;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: #2A2D34;
+            border-radius: 5px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: #FFD60A;
+        }
+        h3 {
+            color: #1bf0de;
+        }
+
+        .request {
+            border: 2px solid #dedede; /* Set border color */
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #5a6aa3; /* Background color */
+        }
+
+        .shopping {
+            background-color: #310e3a; /* Specific background for shopping */
+        }
+
+        .parcel {
+            background-color: #292d10; /* Specific background for parcel */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2vh;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Employee - Requests</h1>
+        <nav>
+            <a href="/employee/dashboard">Dashboard</a>
+            <a href="/employee/profile">My Profile</a>
+            <a href="/user/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>My Requests</h2>
+
+        {% if not detailed_requests %}
+            <p>No requests found.</p>
+        {% else %}
+            {% for req in detailed_requests %}
+                <div class="request {% if req.type == 'shopping' %}shopping{% else %}parcel{% endif %}">
+                    <h3>{{ req.type | capitalize }} Request</h3>
+                    <p>Request ID: {{ req.request[0] }}</p>
+                    <p>Status: {{ req.request[1] }}</p>
+                    <p>Details: {{ req.details[2] }} | Address: {{ req.details[3] }} | Contact: {{ req.details[4] }}</p>
+                    <p>Additional Info: {{ req.details[5] }}</p>
+                    <p>Payment Amount: Ksh 230</p>
+                    <p>Date: {{ req.details[9] }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Tutume. All rights reserved.</p>
+    </footer>
+</body>
+</html>

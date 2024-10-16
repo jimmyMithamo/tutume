@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Courier Requests</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1B1B2A; /* Background color */
+            margin: 0;
+            padding: 0;
+            color: #EAEAEA; /* Text color */
+        }
+
+        header {
+            background: linear-gradient(90deg, #3E5B8A, #6A4C93);
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFD60A;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+            max-width: 800px; /* Limit the width */
+            margin: auto; /* Center the main content */
+            background: #2A2D34; /* Main area background */
+            border-radius: 5px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: #FFD60A; /* Title color */
+        }
+
+        .request-card {
+            background-color: #2A2D34; /* Card background */
+            border: 1px solid #6A4C93; /* Card border color */
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .request-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .request-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .request-header h3 {
+            margin: 0;
+            color: #FFD60A;
+        }
+
+        .request-details {
+            color: #EAEAEA; /* Text color */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2vh;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <h1>Employee Courier Requests</h1>
+        <nav>
+            <a href="/employee/dashboard">Dashboard</a>
+            <a href="/employee/fetch_employee_requests">My Requests</a>
+            <a href="/employee/profile">My Profile</a>
+            <a href="/user/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Request</h2>
+        {% if request_details %}
+            <div class="request-card">
+                <div class="request-header">
+                    <h2>{{ request_type.upper() }}</h2>
+                </div>
+                <form action="/employee/accept_request" method="post">
+                    {% if request_type == 'shopping' %}
+                        <div class="request-details">
+                            <p><strong>Request ID:</strong> {{ request_details[0] }}</p>
+                            <p><strong>Request Type:</strong> {{ request_type }}</p>
+                            <p><strong>Address:</strong> {{ request_details[3] }}</p>
+                            <p><strong>Items:</strong> {{ request_details[4] }}</p>
+                            <p><strong>Additional Info:</strong> {{ request_details[5] }}</p>
+                            <p><strong>Amount:</strong> <span style="color: rgb(0, 255, 13);font-weight: bolder;">KSH 230</span></p>
+                            <input type="hidden" name="request_id" value="{{ request_details[0] }}">
+                            <button type="submit">Accept Request</button>
+                        </div>
+                    {% else %}
+                        <div class="request-details">
+                            <p><strong>Request ID:</strong> {{ request_details[0] }}</p>
+                            <p><strong>Request Type:</strong> {{ request_type }}</p>
+                            <p><strong>Address:</strong> {{ request_details[3] }}</p>
+                            <p><strong>Weight:</strong> {{ request_details[4] }}</p>
+                            <p><strong>Additional Info:</strong> {{ request_details[5] }}</p>
+                            <p><strong>Amount:</strong>KSH 230</p>
+                            <input type="hidden" name="request_id" value="{{ request_details[0] }}">
+                            <button type="submit">Accept Request</button>
+                        </div>
+                    {% endif %}
+                </form>
+    
+                <!-- This is the correct placement for the reject request form -->
+                <form action="/reject_request" method="post">
+                    <input type="hidden" name="request_id" value="{{ request_details[0] }}">
+                    <button type="submit">Reject</button>
+                </form>
+            </div>
+        {% else %}
+            <p>No requests found.</p>
+        {% endif %}
+    </main>
+    
+    
+    <footer>
+        <p>&copy; 2024 Tutume Courier System</p>
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Shopping Requests</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1B1B2A; /* Dark background */
+            margin: 0;
+            padding: 0;
+            color: #EAEAEA; /* Light text color for contrast */
+        }
+
+        header {
+            background: linear-gradient(90deg, #3E5B8A, #6A4C93); /* Rich gradient for the header */
+            color: #FFFFFF; /* White text for header */
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #FFFFFF; /* White text for navigation */
+            text-decoration: none;
+            font-weight: bold; /* Bold navigation links */
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFD60A; /* Yellow on hover */
+        }
+
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: #2A2D34; /* Darker background for the main content */
+            border-radius: 5px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: #FFD60A; /* Bright yellow for headings */
+            margin-bottom: 20px;
+        }
+
+        .request {
+            border: 1px solid #6A4C93; /* Rich purple border */
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            background: #3E5B8A; /* Rich blue background for requests */
+        }
+
+        .status {
+            font-weight: bold;
+            color: #00ff73; /* Bright green color for displayed status */
+            margin-top: 5px;
+        }
+
+        label, select {
+            display: block;
+            margin: 10px 0 5px;
+            color: #edd900; /* Yellow for labels */
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #6A4C93; /* Rich purple border for inputs */
+            border-radius: 5px;
+            background: #1B1B2A; /* Dark background for select and button */
+            color: #EAEAEA; /* Light text color */
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        /* Assign To and Update Status dropdown styles */
+        select {
+            background-color: #ffffff; /* White background for selects */
+            color: #000000; /* Black text color */
+        }
+
+        select:hover {
+            background-color: #FFD60A; /* Bright yellow on hover */
+            border-color: #000000; /* Black border on hover */
+        }
+
+        button {
+            background-color: #05ff2e; /* Bright green button background */
+            border: none;
+            color: #1B1B2A; /* Dark text for button */
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #FFD60A; /* Bright yellow on button hover */
+            color: #1B1B2A; /* Dark background for text on hover */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            bottom: 0;
+            width: 100%;
+            height: 2vh;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin - Shopping Requests</h1>
+        <nav>
+            <a href="/admin">Dashboard</a>
+            <a href="/admin/parcels">Check Parcels</a>
+            <a href="/admin/shopping">Shopping Requests</a>
+            <a href="/admin/surprise_express">Surprise Express Requests</a>
+            <a href="/admin/employees">Employees</a>
+            <a href="/user/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>All Shopping Requests</h2>
+        
+        {% if shopping_requests %}
+            {% for request in shopping_requests %}
+                <div class="request">
+                    <p><strong>Customer Name:</strong> {{ request[10] }}</p>
+                    <p><strong>Customer Address:</strong> {{ request[3] }}</p>
+                    <p><strong>Customer Phone:</strong> {{ request[2] }}</p>
+                    <p><strong>Items:</strong> {{ request[4] }}</p>
+                    <p><strong>Additional Information:</strong> {{ request[5] }}</p>
+                    <p><strong>Status:</strong> <span class="status">{{ request[6] }}</span></p>
+                    <p><strong>Requested At:</strong> {{ request[7] }}</p>
+                    <p><strong>Assigned to:</strong> {{ request[8] }}</p>
+                    <form action="{{ url_for('admin.update_shopping_status', shopping_id=request[1]) }}" method="POST">
+                        <label for="status">Update Status:</label>
+                        <select id="status" name="status">
+                            <option value="Request Received" {% if request[7] == 'Request Received' %}selected{% endif %}>Request Received</option>
+                            <option value="Request Approved" {% if request[7] == 'Request Approved' %}selected{% endif %}>Request Approved</option>
+                            <option value="In Progress" {% if request[7] == 'In Progress' %}selected{% endif %}>In Progress</option>
+                            <option value="In Transit" {% if request[7] == 'In Transit' %}selected{% endif %}>In transit</option>
+                            <option value="Completed" {% if request[7] == 'Completed' %}selected{% endif %}>Completed</option>
+                            <option value="Cancelled" {% if request[7] == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                        </select>
+                    
+                        <label for="assigned_to">Assign To:</label>
+                        <select id="assigned_to" name="assigned_to">
+                            <option value="">Select Employee</option>
+                            {% for employee in employees %}
+                                <option value="{{ employee }}">{{ employee }}</option>
+                            {% endfor %}
+                        </select>
+                    
+                        <button type="submit">Update</button>
+                    </form>
+                    
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No shopping requests found.</p>
+        {% endif %}
+    </main>
+    
+
+    <footer>
+        <p>&copy; 2024 Tutume. All rights reserved.</p>
+    </footer>
+</body>
+</html>

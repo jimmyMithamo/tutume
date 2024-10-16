@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutume</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(10deg, #000000, #fff); /* Gradient from light to dark grey */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            background: linear-gradient(90deg, #c7c5b7, #bd460f); /* Gradient from dark to light green */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .home {
+            background: linear-gradient(90deg, #FF5722, #2c2c2c); /* Gradient from dark to light orange */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline; /* Add hover effect */
+        }
+
+        section {
+            padding: 10px 10px;
+            text-align: center;
+            flex: 1; /* Allow the section to grow and fill the available space */
+            position: relative;
+            color: #ffffff; /* Set a dark color for text */
+            background-color: #006989; /* White background for sections */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin: 10px; /* Margin for spacing */
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap; /* Wrap items to the next line */
+            justify-content: center; /* Center the services */
+            margin: 10px 0; /* Add margin above and below the services section */
+        }
+
+        .service {
+            position: relative;
+            width: calc(30% - 5px); /* Set width to 30% of the parent minus margins */
+            margin: 10px; /* Add margin for spacing */
+            border-radius: 10px;
+            overflow: hidden; /* Hide overflow for rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            transition: transform 0.3s ease; /* Add transition for hover effect */
+        }
+
+        .service:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+
+        .service img {
+            width: 100%;
+            height: 100%;
+            display: block; /* Ensures images take up full width */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            color: #fff; /* White text */
+            padding: 10px; /* Add some padding */
+            text-align: center; /* Center text */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease; /* Add transition for hover effect */
+            margin-top: 20px; /* Space above button */
+        }
+
+        button:hover {
+            background-color: #388E3C; /* Darker shade on hover */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .service {
+                width: calc(50% - 20px); /* Set to 50% on medium screens */
+            }
+        }
+
+        @media (max-width: 500px) {
+            .service {
+                width: calc(100% - 20px); /* Set to 100% on small screens */
+            }
+        }
+
+        header button {
+            background-color: transparent; /* Make the background transparent */
+            color: white; /* Ensure the text color is white */
+            border: none; /* Remove border */
+            cursor: pointer; /* Change cursor to pointer */
+            padding: 10px 15px; /* Add some padding for the button */
+            position: absolute; /* Position the button absolutely */
+            right: 10px; /* Align to the right */
+            top: 10px; /* Align to the top */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tutume</h1>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/home/services">Services</a>
+            <a href="/home/about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        {% if logged_in %}
+        <button onclick="confirmLogout()">
+            Logout
+        </button>
+        {% endif %}
+    </header>
+    <section class="home">
+        <h2 style="color: #ffffff;">Delegate Your Tasks</h2>
+        <p>We handle your tasks efficiently and effectively.</p>
+        <form action="{{ url_for('user.register') }}" method="POST" style="display: inline;">
+            {% if not logged_in %}
+            <button type="submit">Get Started</button>
+            {% endif %}
+            
+            {% if logged_in %}
+            <p>Visit our <a style="color: rgb(30, 255, 0);font-size: larger;" href="/home/services">Services </a> page to send us</p>
+            {% endif %}
+        </form>
+    </section>
+
+    <!-- Services Section -->
+    <section>
+        <h2>Our Services</h2>
+        <div class="services">
+            <div class="service">
+                <img src="/static/images/shopping.jpg" alt="Shopping Service">
+                <div class="overlay">
+                    <h3>Shopping Service</h3>
+                    <p>We buy and deliver items right to your doorstep.</p>
+                </div>
+            </div>
+            <div class="service">
+                <img src="/static/images/delivery.jpg" alt="Shopping Service">
+                <div class="overlay">
+                    <h3>Food delivery Services</h3>
+                    <p>We partner with local restaurants to deliver meals to customers.</p>
+                </div>
+            </div>
+            <div class="service">
+                <img src="/static/images/parcel.jpg" alt="Parcel Service">
+                <div class="overlay">
+                    <h3>Parcel Service</h3>
+                    <p>Your packages delivered safely and on time.</p>
+                </div>
+            </div>
+            <div class="service">
+                <img src="/static/images/furniture.jpg" alt="Long Distance Service">
+                <div class="overlay">
+                    <h3>Furniture services</h3>
+                    <p>We deliver furniture and appliances.</p>
+                </div>
+            </div>
+            <div class="service">
+                <img src="/static/images/handyman.jpg" alt="Handyman">
+                <div class="overlay">
+                    <h3>Handyman Service</h3>
+                    <p>Connect customers with
+                        skilled handymen for tasks like repairs, installations, or assembly</p>
+                </div>
+            </div>
+            <div class="service">
+                <img src="/static/images/cleaning.jpg" alt="Cleaning Service">
+                <div class="overlay">
+                    <h3>Cleaning Service</h3>
+                    <p>Expert cleaning solutions for a spotless environment!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Tutume. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function confirmLogout() {
+            if (confirm('Are you sure you want to log out?')) {
+                window.location.href = '{{ url_for('user.logout') }}';
+            }
+        }
+    </script>
+</body>
+</html>

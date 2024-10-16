@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tutume</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #c7c5b7, #bd460f); /* Gradient from dark to light green */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #fff;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 800vw;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s; /* Animation effect */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #3700fd; /* Main accent color */
+            margin-top: 20px;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .team {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        .team-member {
+            background: #333130;
+            color: rgb(255, 255, 255);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            flex-basis: calc(30% - 20px);
+            transition: transform 0.3s;
+        }
+        .team-member p {
+            color: #fff;
+        }
+
+        .team-member:hover {
+            transform: scale(1.05); /* Grow effect on hover */
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+        }
+
+        /* Keyframe for fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .team-member {
+                flex-basis: calc(45% - 20px);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .team-member {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tutume</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/home/services">Services</a>
+            <a href="/home/about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        {% if logged_in %}
+        <button onclick="confirmLogout()">
+            Logout
+        </button>
+        {% endif %}
+    </header>
+    <div class="container">
+        <h1>About Tutume</h1>
+        <p>Welcome to Tutume, where we simplify your life by handling everyday tasks with efficiency and care. Our goal is to help you focus on what truly matters by taking the burden of daily chores off your shoulders.</p>
+        
+        <h2>Our Mission</h2>
+        <p>At Tutume, our mission is to provide reliable and convenient services that cater to your unique needs. Whether it's shopping, parcel delivery, or handyman services, we're here to make your life easier.</p>
+
+        <h2>Meet the Team</h2>
+        <div class="team">
+            <div class="team-member">
+                <h3>Josphat Kamau</h3>
+                <p>Founder & CEO</p>
+                <p>With a passion for innovation and efficiency, Josphat leads Tutume with a vision to create a seamless service experience.</p>
+            </div>
+            <div class="team-member">
+                <h3>Jimmy Mithamo</h3>
+                <p>Head of Operations</p>
+                <p>Mithamo ensures that our services run smoothly, always looking for ways to improve our offerings.</p>
+            </div>
+            <div class="team-member">
+                <h3>Person x</h3>
+                <p>Customer Relations</p>
+                <p>Personx is dedicated to making sure our customers are happy and their needs are met with utmost care.</p>
+            </div>
+        </div>
+
+        <h2>Why Choose Us?</h2>
+        <p>We understand that your time is valuable. That's why we focus on delivering high-quality services that you can trust. Our team is committed to excellence, ensuring that every task is completed to your satisfaction.</p>
+        
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need assistance, feel free to reach out to us through our contact page. We are here to help you!</p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Tutume. All rights reserved.</p>
+    </div>
+</body>
+</html>

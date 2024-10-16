@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handyman Services - Tutume</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(90deg, #c7c5b7, #bd460f);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            color: #000000;
+            padding: 20px;
+            max-width: 80%;
+            margin: auto;
+            background: #D3EE98;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h2 {
+            color: #0400ff;
+        }
+        p {
+            color: #000000;
+        }
+
+        .services {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            color: #000000;
+        }
+
+        .service {
+            margin: 15px;
+            text-align: center;
+            color: #fff;
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .service img {
+            width: 150px; /* Set a width for the images */
+            height: 150px; /* Set a height for the images */
+            border-radius: 10px;
+            transition: transform 0.2s; /* Adds a zoom effect */
+        }
+
+        .service img:hover {
+            transform: scale(1.05); /* Zoom in on hover */
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            padding-top: 30px; /* Location of the box */
+        }
+
+        .modal-content {
+            align-items: center;
+            background-color: #fefefe;
+            margin: 20% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1vh;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tutume - Handyman Services</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/services">Services</a>
+            <a href="/about">About</a>
+            <a href="/track_handyman_requests">Track Requests</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Reliable Handyman Services</h2>
+        <p>
+            Our handyman services cover a wide range of tasks, from home repairs to installations and maintenance.
+            Whether you need help with plumbing, electrical work, or general home improvements, our skilled professionals are here to assist you.
+        </p>
+        
+        <h3>Click on a service to learn more:</h3>
+        <div class="services">
+            <div class="service" onclick="openModal('Plumbing', 'We provide professional plumbing services including repairs, installations, and maintenance.')">
+                <img src="/static/images/plumbing.jpg" alt="Plumbing Service">
+                <p>Plumbing</p>
+            </div>
+            <div class="service" onclick="openModal('Electrical Work', 'Expert electrical work for installations, repairs, and safety inspections.')">
+                <img src="/static/images/electrical.jpg" alt="Electrical Service">
+                <p>Electrical Work</p>
+            </div>
+            <div class="service" onclick="openModal('Painting', 'Professional painting services for interiors and exteriors.')">
+                <img src="/static/images/painting.jpg" alt="Painting Service">
+                <p>Painting</p>
+            </div>
+            <div class="service" onclick="openModal('Furniture Assembly', 'Assembly services for various types of furniture.')">
+                <img src="/static/images/assembly.jpg" alt="Furniture Assembly">
+                <p>Furniture Assembly</p>
+            </div>
+            <div class="service" onclick="openModal('Window Cleaning', 'Comprehensive window cleaning services to enhance your view.')">
+                <img src="/static/images/window.jpg" alt="Window Cleaning">
+                <p>Window Cleaning</p>
+            </div>
+            <div class="service" onclick="openModal('Pressure Washing', 'High-pressure washing services for driveways, decks, and more.')">
+                <img src="/static/images/pressure.jpeg" alt="Pressure Washing">
+                <p>Pressure Washing</p>
+            </div>
+            <div class="service" onclick="openModal('Landscaping', 'Expert landscaping services to beautify your outdoor space.')">
+                <img src="/static/images/landscaping.jpeg" alt="Landscaping">
+                <p>Landscaping</p>
+            </div>
+            <div class="service" onclick="openModal('Carpentry', 'Skilled carpentry services for custom furniture and repairs.')">
+                <img src="/static/images/carpentry.jpeg" alt="Carpentry">
+                <p>Carpentry</p>
+            </div>
+            <div class="service" onclick="openModal('Appliance Repair', 'Repair services for all major household appliances.')">
+                <img src="/static/images/appliance.jpeg" alt="Appliance Repair">
+                <p>Appliance Repair</p>
+            </div>
+            <div class="service" onclick="openModal('Roofing', 'Professional roofing services for repairs and new installations.')">
+                <img src="/static/images/roofing.jpeg" alt="Roofing">
+                <p>Roofing</p>
+            </div>
+            <div class="service" onclick="openModal('Remodeling', 'Remodeling services for kitchens, bathrooms, and more.')">
+                <img src="/static/images/remodelling.jpeg" alt="Remodeling">
+                <p>Remodeling</p>
+            </div>
+            <div class="service" onclick="openModal('Maintenance', 'Regular maintenance services for all your home needs.')">
+                <img src="/static/images/maintenance.jpg" alt="Maintenance">
+                <p>Maintenance</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <a href="/book_appointment">
+                <button>Schedule service</button>
+            </a>
+            
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Tutume. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function openModal(title, description) {
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalDescription").innerText = description;
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        function bookAppointment() {
+            fetch('/book_appointment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    service: document.getElementById("modalTitle").innerText
+                })
+            });
+            alert("Appointment booked!"); // Replace with actual booking logic
+            closeModal();
+        }
+
+        // Close the modal when clicking anywhere outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

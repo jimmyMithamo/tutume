@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees and Users List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1B1B2A; /* Dark background */
+            margin: 0;
+            padding: 0;
+            color: #EAEAEA; /* Light text color for contrast */
+        }
+
+        header {
+            background: linear-gradient(90deg, #3E5B8A, #6A4C93); /* Rich gradient for the header */
+            color: #FFFFFF; /* White text for header */
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #FFFFFF; /* White text for navigation */
+            text-decoration: none;
+            font-weight: bold; /* Bold navigation links */
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFD60A; /* Yellow on hover */
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #FFD60A; /* Bright yellow for headings */
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50; /* Green header background */
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #3E5B8A; /* Darker background for even rows */
+        }
+
+        tr:hover {
+            background-color: #6A4C93; /* Purple on hover */
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333; /* Dark footer */
+            color: white;
+            position: fixed;
+            bottom: 0;
+            height: 2vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        button {
+            background-color: #05ff2e; /* Bright green button background */
+            border: none;
+            color: #1B1B2A; /* Dark text for button */
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: #FFD60A; /* Bright yellow on button hover */
+            color: #1B1B2A; /* Dark background for text on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin - Employees and Users</h1>
+        <nav>
+            <a href="/admin">Dashboard</a>
+            <a href="/admin/parcels">Check Parcels</a>
+            <a href="/admin/shopping">Shopping Requests</a>
+            <a href="/admin/employees">Employees</a>
+            <a href="/user/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>All Employees</h2>
+        
+        {% if employees %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Request ID</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                        <tr>
+                            <td>{{ employee[0] }}</td>  <!-- Assuming employee ID is at index 0 -->
+                            <td>{{ employee[1] }}</td>  <!-- Adjust according to your employee table structure -->
+                            <td>{{ employee[2] }}</td>
+                            <td>{{ employee[3] }}</td>
+                            <td>{{ employee[6] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No employees found.</p>
+        {% endif %}
+
+        <h2>All Users</h2>
+
+        {% if users %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user[0] }}</td>  <!-- User ID -->
+                            <td>{{ user[1] }}</td>  <!-- Username -->
+                            <td>{{ user[2] }}</td>  <!-- Phone number -->
+                            <td>{{ user[3] }}</td>  <!-- Email -->
+                            <td>{{ user[5] }}</td>  <!-- Is Admin -->
+                            <td>
+                                <form action="{{ url_for('admin.promote_user', id = user[0]) }}" method="post" style="display:inline;">
+                                    <button type="submit">Promote to Employee</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No users found.</p>
+        {% endif %}
+
+    </main>
+   
+
+    <footer>
+        <p>&copy; 2024 Tutume Employees</p>
+    </footer>
+</body>
+</html>

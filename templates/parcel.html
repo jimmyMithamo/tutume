@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Services - Tutume</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(90deg, #c7c5b7, #bd460f);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1vh;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tutume Parcel Services</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/home/services">Services</a>
+            <a href="/home/about">About</a>
+            <a href="/services/track_parcels">Track parcels</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Send a Parcel</h2>
+        <form action="/services/submit_parcel" method="POST">
+            <label for="recipient_name">Recipient Name:</label>
+            <input type="text" id="recipient_name" name="recipient_name" required>
+
+            <label for="recipient_address">Recipient Address:</label>
+            <input type="text" id="recipient_address" name="recipient_address" required>
+
+            <label for="recipient_phone">Recipient Phone Number:</label>
+            <input type="text" id="recipient_phone" name="recipient_phone" required>
+
+            <label for="parcel_details">Parcel Details:</label>
+            <textarea id="parcel_details" name="parcel_details" rows="4" required></textarea>
+
+            <label for="collection_point">Collection Point:</label>
+            <input type="text" id="collection_point" name="collection_point" required>
+
+            <label for="additional_instructions">Additional Instructions:</label>
+            <textarea id="additional_instructions" name="additional_instructions" rows="4"></textarea>
+
+            <button type="submit">Submit Request</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Tutume. All rights reserved.</p>
+    </footer>
+</body>
+</html>

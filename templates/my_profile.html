@@ -1,0 +1,227 @@
+<!-- templates/user/profile.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1B1B2A;
+            margin: 0;
+            padding: 0;
+            color: #EAEAEA;
+        }
+
+        header {
+            background: linear-gradient(90deg, #3E5B8A, #6A4C93);
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFD60A;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+            background: #2A2D34;
+            border-radius: 5px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            color: #FFD60A;
+        }
+
+        .profile-card {
+            background-color: #2A2D34;
+            border: 1px solid #6A4C93;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .profile-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .profile-header h3 {
+            margin: 0;
+            color: #FFD60A;
+        }
+
+        .profile-details {
+            color: #EAEAEA;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2vh;
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 25%;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            display: none;
+            justify-content: center; /* Center the modal horizontally */
+            align-items: center; /* Center the modal vertically */
+        }
+      
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            color: black;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal input[type="text"],
+        .modal input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .modal button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .modal button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>User Profile</h1>
+        <nav>
+            <a href="/employee/dashboard">Dashboard</a>
+            <a href="/employee/profile">My Profile</a>
+            <a href="/user/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>My Account</h2>
+        <div class="profile-card">
+            <div class="profile-header">
+                <h3>Username: {{ user[1] }}</h3>
+            </div>
+            <div class="profile-details">
+                <p><strong>User Id:</strong> {{ user[0] }}</p>
+                <p><strong>Email:</strong> {{ user[3] }}</p>
+                <p><strong>Phone:</strong> {{ user[2] }}</p>
+                <p><strong>Location:</strong> {{ location }}</p>
+                <p style="color: rgb(238, 255, 0);"><strong>Role:</strong> {{ user[5] }}</p>
+                <button id="editProfileBtn">Edit Profile</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="editProfileForm" action="/employee/profile/edit" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ user[1] }}">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ user[3] }}">
+
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" value="{{ user[2] }}">
+
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" value="{{ location }}">
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Tutume Courier System</p>
+    </footer>
+
+    <script>
+        var modal = document.getElementById("editProfileModal");
+        var btn = document.getElementById("editProfileBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
