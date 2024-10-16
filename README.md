@@ -10,5 +10,6 @@ Make sure you have Python 3.x and pip installed on your machine. You can downloa
    git clone https://your-repo-url.git
    cd tutume
    ./setup.sh
+   python3 tutume.py
    
 
