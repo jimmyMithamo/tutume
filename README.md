@@ -43,7 +43,7 @@ python3 tutume.py
 ## 📚 Usage
 
 - Access the app at [http://localhost:5000](http://localhost:5000)
-- Log in as admin or create a new user
+- Log in as admin or create a new user using [http://localhost:5000/admin]
 - Create, assign, and track delivery/service requests
 
 ---
