@@ -7,7 +7,7 @@ Make sure you have Python 3.x and pip installed on your machine. You can downloa
 
 1. **Clone the repository** (if applicable):
    ```bash
-   git clone https://your-repo-url.git
+   git clone
    cd tutume
    ./setup.sh
    python3 tutume.py
